@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment #Nous faisons un déploiement 
+metadata:
+  name: todos-template-deployments #Nous donnons le nom du déploiement 
+spec:
+  replicas: 1   #Permet de choisir le nombre d'environement qu'on lance et de relancer en cas de crash
+  selector:
+    matchLabels: 
+      app: todotemplateservice #defini le nom de mon service
+  template: 
+    metadata:
+      labels:
+        app: todotemplateservice 
+    spec: 
+      containers:
+        - name: todotemplateservice
+          image: max34x/todotemplateservice:latest  #image de notre service qui se trouve sur docker Hub
