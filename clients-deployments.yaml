@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: meets-deployments
+  name: clients-deployments
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: meetservice
+      app: clientservice
   template:
     metadata:
       labels:
-        app: meetservice
+        app: clientservice
     spec:
       containers:
-        - name: meetservice
-          image: refweb/meetservice:latest
+        - name: clientservice
+          image: refweb/clientservice:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: meet-clusterip-server
+  name: client-clusterip-server
 spec:
   type: ClusterIP
   selector:
-    app: meetservice
+    app: clientservice
   ports:
-    - name: meetservice
+    - name: clientservice
       protocol: TCP
       port: 80
       targetPort: 80

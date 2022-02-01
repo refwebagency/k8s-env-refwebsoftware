@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-server
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-reges: 'true'
+spec:
+  rules:
+    - host: refweb.com # On defini le nom de domaine sur la quel nous allons requeter
+      http:
+        paths:
+          - path: /meet # On defini le chemin d'acces au service pour les requetes
+            pathType: Prefix
+            backend:
+              service:
+                name: meet-clusterip-server # On recupere l'adresse pour communiquer avec le service
+                port:
+                  number: 80
+          - path: /client # On defini le chemin d'acces au service pour les requettes
+            pathType: Prefix
+            backend:
+              service:
+                name: client-clusterip-server # On recupere l'adresse pour communiquer avec le service
+                port:
+                  number: 80
